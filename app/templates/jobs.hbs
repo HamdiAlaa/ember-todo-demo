@@ -1,0 +1,59 @@
+ {{!--
+<p> Todo Jobs </p>
+<button type="button" class="btn btn-primary">Primary</button>
+<button type="button" class="btn btn-secondary">Secondary</button>
+<div class="row">
+    <ul>
+        {{#each model as |jobs|}}
+        <li>Job name : {{jobs.jobname}}</li>
+        <li>Status : {{jobs.status}}</li>
+        {{/each}}
+    </ul>
+</div> --}}
+
+<h1 style="text-align:center;margin-top: 10px;">Hi diduenjoy the App !! </h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="todolist not-done">
+                <h1>Todo tasks</h1>
+                {{input value = newTask class="form-control add-todo" placeholder="Add todo"}}
+                <button id="checkAll" class="btn btn-secondary" {{action "createNewTask"}}>Add New Task</button>
+                <hr>
+                <ul id="sortable" class="list-unstyled">
+                    {{!-- Debut boucle --}} {{#each model as |jobs|}} {{#if (eq jobs.status 1)}}
+                    <li class="ui-state-default">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" {{action 'updateJob' jobs.id on="change" }} value=""> {{jobs.jobname}}
+                            </label>
+
+                            <button type="button" class="close" aria-label="Close" {{action 'destroyJob' jobs.id }}>
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </li>
+                    {{/if}} {{/each}}
+                </ul>
+                {{!-- Fin de la boucle --}}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="todolist">
+                <h1>Already Done</h1>
+                <ul id="done-items" class="list-unstyled">
+                    {{#each model as |jobs|}} {{#if (eq jobs.status 0)}}
+                    <li>{{jobs.jobname}}
+                        <button type="button" class="close" aria-label="Close" {{action 'destroyJob' jobs.id }}>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <button class="remove-item btn btn-default btn-xs pull-right">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </li>
+                    {{/if}} {{/each}}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
